@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "projects": {
+    "charts": {
+      "projectType": "application",
+      "root": "apps/charts",
+      "sourceRoot": "apps/charts/src",
+      "prefix": "charts-demo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/charts",
+            "index": "apps/charts/src/index.html",
+            "main": "apps/charts/src/main.ts",
+            "polyfills": "apps/charts/src/polyfills.ts",
+            "tsConfig": "apps/charts/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/charts/src/favicon.ico", "apps/charts/src/assets"],
+            "styles": ["apps/charts/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/charts/src/environments/environment.ts",
+                  "with": "apps/charts/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "charts:build:production"
+            },
+            "development": {
+              "browserTarget": "charts:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "charts:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/charts/src/**/*.ts",
+              "apps/charts/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/charts"],
+          "options": {
+            "jestConfig": "apps/charts/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "charts-e2e": {
+      "root": "apps/charts-e2e",
+      "sourceRoot": "apps/charts-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/charts-e2e/cypress.json",
+            "tsConfig": "apps/charts-e2e/tsconfig.e2e.json",
+            "devServerTarget": "charts:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "charts:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/charts-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "charts"
+}
