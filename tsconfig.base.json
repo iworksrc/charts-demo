@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@charts-demo/models": ["libs/models/src/index.ts"]
+      "@charts-demo/models": ["libs/models/src/index.ts"],
+      "@charts-demo/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
