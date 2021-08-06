@@ -62,6 +62,7 @@
     "@nrwl/eslint-plugin-nx": "12.6.4",
     "@nrwl/jest": "12.6.4",
     "@nrwl/linter": "12.6.4",
+    "@nrwl/storybook": "^12.6.5",
     "@nrwl/tao": "12.6.4",
     "@nrwl/workspace": "12.6.4",
     "@tailwindcss/typography": "0.4.1",
