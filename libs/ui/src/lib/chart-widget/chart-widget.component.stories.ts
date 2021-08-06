@@ -6,17 +6,23 @@ export default {
   component: ChartWidgetComponent,
   decorators: [
     moduleMetadata({
-      imports: [],
+      imports: []
     })
   ],
+  argTypes: {
+    data: {
+      options: [['bar chart', 'line chart'], ['some data', 'another data']],
+      control: { type: 'radio' }
+    }
+  }
 } as Meta<ChartWidgetComponent>;
 
 const Template: Story<ChartWidgetComponent> = (args: ChartWidgetComponent) => ({
   component: ChartWidgetComponent,
-  props: args,
+  props: args
 });
 
 
 export const Primary = Template.bind({});
 Primary.args = {
-}
+};
