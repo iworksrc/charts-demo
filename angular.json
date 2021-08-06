@@ -18,7 +18,10 @@
             "tsConfig": "apps/charts/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["apps/charts/src/favicon.ico", "apps/charts/src/assets"],
-            "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "apps/charts/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/charts/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -113,6 +116,27 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/charts-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "models": {
+      "root": "libs/models",
+      "sourceRoot": "libs/models/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/models/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/models"],
+          "options": {
+            "jestConfig": "libs/models/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
