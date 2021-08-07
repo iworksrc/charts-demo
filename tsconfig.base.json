@@ -13,10 +13,13 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "strictNullChecks": false,
     "baseUrl": ".",
     "paths": {
+      "@charts-demo/mocks": ["libs/mocks/src/index.ts"],
       "@charts-demo/models": ["libs/models/src/index.ts"],
-      "@charts-demo/ui": ["libs/ui/src/index.ts"]
+      "@charts-demo/ui": ["libs/ui/src/index.ts"],
+      "@charts-demo/utils": ["libs/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
