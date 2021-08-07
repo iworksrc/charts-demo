@@ -40,6 +40,9 @@
       "tags": [],
       "implicitDependencies": ["charts"]
     },
+    "mocks": {
+      "tags": []
+    },
     "models": {
       "tags": []
     },
@@ -49,6 +52,9 @@
     "ui-e2e": {
       "tags": [],
       "implicitDependencies": ["ui"]
+    },
+    "utils": {
+      "tags": []
     }
   }
 }

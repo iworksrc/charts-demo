@@ -1,5 +1,6 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { ChartWidgetComponent } from './chart-widget.component';
+import { PERIOD1, PERIOD2 } from '../../../../mocks/src';
 
 export default {
   title: 'ChartWidgetComponent',
@@ -11,7 +12,7 @@ export default {
   ],
   argTypes: {
     data: {
-      options: [['bar chart', 'line chart'], ['some data', 'another data']],
+      options: [PERIOD1, PERIOD2],
       control: { type: 'radio' }
     }
   }
