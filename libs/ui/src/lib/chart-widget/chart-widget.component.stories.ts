@@ -7,7 +7,9 @@ export default {
   component: ChartWidgetComponent,
   decorators: [
     moduleMetadata({
-      imports: []
+      imports: [
+
+      ]
     })
   ],
   argTypes: {

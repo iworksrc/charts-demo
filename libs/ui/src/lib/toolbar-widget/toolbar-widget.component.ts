@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'charts-demo-toolbar-widget',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarWidgetComponent implements OnInit {
 
-  constructor() { }
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+
 
   ngOnInit(): void {
+    console.warn('not implemented');
   }
 
 }
