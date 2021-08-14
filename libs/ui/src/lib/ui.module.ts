@@ -8,6 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChatLineWidgetComponent } from './chat-line-widget/chat-line-widget.component';
 
 @NgModule({
   imports: [
@@ -21,12 +22,14 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     ChartWidgetComponent,
     ChartDirective,
-    ToolbarWidgetComponent
+    ToolbarWidgetComponent,
+    ChatLineWidgetComponent
   ],
   exports: [
     ChartWidgetComponent,
     ToolbarWidgetComponent,
     ChartDirective,
+    ChatLineWidgetComponent
   ]
 })
 export class UiModule {}

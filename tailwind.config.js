@@ -7,7 +7,10 @@ module.exports = {
       content: [
         './apps/**/*.{html,ts}',
         './libs/**/*.{html,ts}',
-      ]
+      ],
+      options: {
+        safelist: ['axis', 'axis--x', 'axis--y', 'line' ]
+      }
     },
     darkMode: 'class', // or 'media' or 'class'
     theme: {
