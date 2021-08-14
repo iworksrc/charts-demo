@@ -23,6 +23,8 @@ export class ChartWidgetComponent implements OnChanges, OnInit {
   @Input() showAxis = true;
   @Input() color = '#4682B4FF';
   @Input() axisColor = '#000000';
+  @Input() setHeight = 300;
+  @Input() setWidth = 600;
 
   // constructor() { }
 
@@ -50,6 +52,8 @@ export class ChartWidgetComponent implements OnChanges, OnInit {
   private async initSvg() {
     this.svg?.selectAll("*").remove();
     this.svg = d3.select('svg')
+    this.svg.attr('width', this.setWidth);
+    this.svg.attr('height', this.setHeight);
     this.width = +this.svg.attr('width') - this.margin.left - this.margin.right;
     this.height = +this.svg.attr('height') - this.margin.top - this.margin.bottom;
     this.g = this.svg.append('g')

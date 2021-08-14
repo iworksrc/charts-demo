@@ -25,6 +25,12 @@ export default {
     },
     color: {
       control: {type: 'color'}
+    },
+    setHeight: {
+      control: {type: 'number'}
+    },
+    setWidth: {
+      control: {type: 'number'}
     }
   }
 } as Meta<ChatLineWidgetComponent>;

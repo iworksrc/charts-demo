@@ -17,6 +17,8 @@ export class ChatLineWidgetComponent implements OnInit {
   @Input() showAxis = true;
   @Input() color = '#4682B4FF';
   @Input() axisColor = '#000000';
+  @Input() setHeight = 300;
+  @Input() setWidth = 600;
 
   // constructor() { }
 
@@ -49,7 +51,8 @@ export class ChatLineWidgetComponent implements OnInit {
     this.svg = d3.select('svg');
     this.g = this.svg.append('g')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
-
+    this.svg.attr('width', this.setWidth);
+    this.svg.attr('height', this.setHeight);
     this.width = +this.svg.attr('width') - this.margin.left - this.margin.right;
     this.height = +this.svg.attr('height') - this.margin.top - this.margin.bottom;
   }
