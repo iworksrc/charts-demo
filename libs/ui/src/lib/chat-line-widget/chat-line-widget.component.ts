@@ -1,4 +1,12 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { Amounts } from '@charts-demo/models';
 
 import * as d3 from 'd3-selection';
@@ -12,7 +20,7 @@ import * as d3Axis from 'd3-axis';
   templateUrl: './chat-line-widget.component.html',
   styleUrls: ['./chat-line-widget.component.scss']
 })
-export class ChatLineWidgetComponent implements OnInit {
+export class ChatLineWidgetComponent implements OnChanges, AfterViewInit {
   @Input() data: Amounts[] = [];
   @Input() showAxis = true;
   @Input() color = '#4682B4FF';
@@ -20,9 +28,10 @@ export class ChatLineWidgetComponent implements OnInit {
   @Input() setHeight = 300;
   @Input() setWidth = 600;
 
-  // constructor() { }
+  @ViewChild('svgCanvas') svgCanvas: ElementRef;
 
   private svg: any;
+
   private g: any;
   private width: number;
   private height: number;
@@ -31,24 +40,21 @@ export class ChatLineWidgetComponent implements OnInit {
   private y: any;
   private line: d3Shape.Line<[number, number]>;
 
-
   ngOnChanges(changes: SimpleChanges): void {
     const data = changes['data'];
-    console.log('changes ==>', changes);
     if (data?.firstChange) {
       return;
     }
     this.constructChart();
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.constructChart();
   }
 
-
   private initSvg() {
     this.svg?.selectAll("*").remove();
-    this.svg = d3.select('svg');
+    this.svg = d3.select(this.svgCanvas.nativeElement);
     this.g = this.svg.append('g')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
     this.svg.attr('width', this.setWidth);

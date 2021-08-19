@@ -1,1 +1,9 @@
-<charts-demo-toolbar-widget></charts-demo-toolbar-widget>
+<charts-demo-toolbar-widget (dataRange)='doFiltering($event)'></charts-demo-toolbar-widget>
+
+<charts-demo-chart-widget
+  [data]='filteredData'
+></charts-demo-chart-widget>
+
+<charts-demo-chat-line-widget
+  [data]='filteredData'
+></charts-demo-chat-line-widget>

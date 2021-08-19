@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DateRange } from '@charts-demo/models';
 
 @Component({
   selector: 'charts-demo-toolbar-widget',
@@ -7,6 +8,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./toolbar-widget.component.scss']
 })
 export class ToolbarWidgetComponent implements OnInit {
+
+  @Output() dataRange = new EventEmitter<DateRange>();
 
   range = new FormGroup({
     start: new FormControl(),

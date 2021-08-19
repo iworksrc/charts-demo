@@ -1,10 +1,11 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
-  Component,
+  Component, ElementRef,
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges
+  SimpleChanges, ViewChild
 } from '@angular/core';
 import * as d3 from 'd3';
 import * as d3Scale from 'd3-scale';
@@ -18,7 +19,7 @@ import { Amounts } from '@charts-demo/models';
   styleUrls: ['./chart-widget.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChartWidgetComponent implements OnChanges, OnInit {
+export class ChartWidgetComponent implements OnChanges, AfterViewInit {
   @Input() data: Amounts[] = [];
   @Input() showAxis = true;
   @Input() color = '#4682B4FF';
@@ -26,32 +27,33 @@ export class ChartWidgetComponent implements OnChanges, OnInit {
   @Input() setHeight = 300;
   @Input() setWidth = 600;
 
-  // constructor() { }
+  @ViewChild('svgCanvas') svgCanvas: ElementRef;
 
   private svg: any;
+
   private g: any;
   private width: number;
   private height: number;
-  private margin = {top: 20, right: 20, bottom: 30, left: 40};
+  private margin = { top: 20, right: 20, bottom: 30, left: 40 };
   private x: any;
   private y: any;
 
   ngOnChanges(changes: SimpleChanges): void {
     const data = changes['data'];
-    console.log('changes ==>', changes);
     if (data?.firstChange) {
       return;
     }
     this.constructChart();
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.constructChart();
   }
 
+
   private async initSvg() {
-    this.svg?.selectAll("*").remove();
-    this.svg = d3.select('svg')
+    this.svg?.selectAll('*').remove();
+    this.svg = d3.select(this.svgCanvas.nativeElement);
     this.svg.attr('width', this.setWidth);
     this.svg.attr('height', this.setHeight);
     this.width = +this.svg.attr('width') - this.margin.left - this.margin.right;
@@ -62,7 +64,7 @@ export class ChartWidgetComponent implements OnChanges, OnInit {
 
   private initAxis() {
     if (!this.data) {
-      return
+      return;
     }
     this.x = d3Scale.scaleBand().rangeRound([0, this.width]).padding(0.1);
     this.y = d3Scale.scaleLinear().rangeRound([this.height, 0]);
@@ -92,25 +94,25 @@ export class ChartWidgetComponent implements OnChanges, OnInit {
 
   private drawBars() {
     if (!this.g) {
-      return
+      return;
     }
     if (!this.data) {
-      return
+      return;
     }
     this.g.selectAll('.bar')
       .data(this.data)
       .enter().append('rect')
       .attr('fill', this.color)
-      .attr('x', (d: any) => this.x(d.date) )
-      .attr('y', (d: any) => this.y(d.value) )
+      .attr('x', (d: any) => this.x(d.date))
+      .attr('y', (d: any) => this.y(d.value))
       .attr('width', this.x.bandwidth())
-      .attr('height', (d: any) => this.height - this.y(d.value) );
+      .attr('height', (d: any) => this.height - this.y(d.value));
   }
 
   private constructChart() {
     this.initSvg();
     this.initAxis();
-    if(this.showAxis) {
+    if (this.showAxis) {
       this.drawAxis();
     }
     this.drawBars();
